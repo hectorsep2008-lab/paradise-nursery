@@ -1,3 +1,22 @@
-# Paradise Nursery Shopping Application
+import React from 'react';
 
-Paradise Nursery is an online plant shop that allows users to browse a variety of houseplants, add them to a shopping cart, and manage their cart items. The application is built using React and Redux Toolkit.
+function AboutUs() {
+  return (
+    <div className="about-us">
+      <h2>About Paradise Nursery</h2>
+      <p>
+        Welcome to Paradise Nursery, where green meets serenity! We are passionate 
+        about bringing the beauty of nature into your home. Our mission is to provide 
+        high-quality houseplants that not only enhance the aesthetic of your living 
+        spaces but also contribute to a healthier and happier lifestyle.
+      </p>
+      <p>
+        At Paradise Nursery, we believe that everyone deserves a touch of nature in 
+        their lives. Whether you're a seasoned plant enthusiast or just starting your 
+        green journey, we have the perfect plant for you.
+      </p>
+    </div>
+  );
+}
+
+export default AboutUs;
