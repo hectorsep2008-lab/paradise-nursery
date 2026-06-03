@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
@@ -7,9 +6,15 @@ function CartItem({ onContinueShopping }) {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
-  const totalCost = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
-  );
+  const calculateTotalAmount = () => {
+    return cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity, 0
+    ).toFixed(2);
+  };
+
+  const calculateTotalCost = (item) => {
+    return (item.price * item.quantity).toFixed(2);
+  };
 
   const handleIncrement = (item) => {
     dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
@@ -44,7 +49,7 @@ function CartItem({ onContinueShopping }) {
 
       <h2>Shopping Cart</h2>
       <h3>Total Items: {cartItems.reduce((sum, item) => sum + item.quantity, 0)}</h3>
-      <h3>Total Cost: ${totalCost.toFixed(2)}</h3>
+      <h3>Total Amount: ${calculateTotalAmount()}</h3>
 
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -55,7 +60,7 @@ function CartItem({ onContinueShopping }) {
             <div style={{ flex: 1 }}>
               <h4 style={{ margin: '0 0 4px' }}>{item.name}</h4>
               <p style={{ margin: '0 0 4px' }}>Unit Price: ${item.price}</p>
-              <p style={{ margin: '0 0 8px' }}>Total: ${(item.price * item.quantity).toFixed(2)}</p>
+              <p style={{ margin: '0 0 8px' }}>Total Cost: ${calculateTotalCost(item)}</p>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <button onClick={() => handleDecrement(item)} style={{ padding: '4px 10px', cursor: 'pointer' }}>-</button>
                 <span>{item.quantity}</span>
